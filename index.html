@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <title>PARFUM LAB</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #0b0b0f;
+      color: #fff;
+      padding: 18px;
+    }
+
+    .header {
+      text-align: center;
+      padding: 15px 0 25px;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: 3px;
+    }
+
+    .subtitle {
+      color: #999;
+      margin-top: 7px;
+      font-size: 14px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: #15151b;
+      border: 1px solid #25252d;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 8px 25px rgba(0,0,0,.25);
+    }
+
+    .image-box {
+      width: 100%;
+      height: 210px;
+      background: #f5f5f5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .image-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .info {
+      padding: 13px;
+    }
+
+    .brand {
+      color: #aaa;
+      font-size: 12px;
+      margin-bottom: 4px;
+    }
+
+    .name {
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 7px;
+    }
+
+    .description {
+      color: #999;
+      font-size: 12px;
+      line-height: 1.35;
+      min-height: 33px;
+      margin-bottom: 12px;
+    }
+
+    .price {
+      font-size: 16px;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .buy {
+      width: 100%;
+      border: 0;
+      border-radius: 11px;
+      padding: 11px;
+      background: #fff;
+      color: #000;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .buy:active {
+      transform: scale(.97);
+    }
+
+    .empty {
+      color: #777;
+      text-align: center;
+      padding: 30px;
+    }
+
+    @media (max-width: 430px) {
+      body {
+        padding: 12px;
+      }
+
+      .grid {
+        gap: 10px;
+      }
+
+      .image-box {
+        height: 170px;
+      }
+
+      .info {
+        padding: 10px;
+      }
+
+      .name {
+        font-size: 14px;
+      }
+
+      .description {
+        font-size: 11px;
+      }
+
+      .price {
+        font-size: 14px;
+      }
+
+      .buy {
+        padding: 10px 5px;
+      }
+    }
+
+    @media (min-width: 700px) {
+      .grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="header">
+    <div class="logo">PARFUM LAB</div>
+    <div class="subtitle">Подбери идеальный аромат</div>
+  </div>
+
+  <div class="grid">
+
+    <!-- 1 -->
+    <div class="card">
+      <div class="image-box">
+        <img src="images/IMG_7702.jpeg" alt="Dior Sauvage">
+      </div>
+      <div class="info">
+        <div class="brand">DIOR</div>
+        <div class="name">Sauvage</div>
+        <div class="description">Свежий, яркий и мужественный аромат.</div>
+        <div class="price">от 5 990 ₽</div>
+        <button class="buy" onclick="buy('Dior Sauvage')">Купить</button>
+      </div>
+    </div>
+
+    <!-- 2 -->
+    <div class="card">
+      <div class="image-box">
+        <img src="images/IMG_7705.jpeg" alt="Bleu de Chanel">
+      </div>
+      <div class="info">
+        <div class="brand">CHANEL</div>
+        <div class="name">Bleu de Chanel</div>
+        <div class="description">Элегантный древесно-свежий аромат.</div>
+        <div class="price">от 7 490 ₽</div>
+        <button class="buy" onclick="buy('Bleu de Chanel')">Купить</button>
+      </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="card">
+      <div class="image-box">
+        <img src="images/IMG_7706.jpeg" alt="Acqua di Gio">
+      </div>
+      <div class="info">
+        <div class="brand">GIORGIO ARMANI</div>
+        <div class="name">Acqua di Giò</div>
+        <div class="description">Свежий морской аромат на каждый день.</div>
+        <div class="price">от 5 490 ₽</div>
+        <button class="buy" onclick="buy('Acqua di Giò')">Купить</button>
+      </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="card">
+      <div class="image-box">
+        <img src="images/IMG_7707.jpeg" alt="Y Eau de Parfum">
+      </div>
+      <div class="info">
+        <div class="brand">YVES SAINT LAURENT</div>
+        <div class="name">Y Eau de Parfum</div>
+        <div class="description">Свежий и насыщенный аромат с древесным характером.</div>
+        <div class="price">от 6 490 ₽</div>
+        <button class="buy" onclick="buy('Y Eau de Parfum')">Купить</button>
+      </div>
+    </div>
+
+    <!-- 5 -->
+    <div class="card">
+      <div class="image-box">
+        <img src="images/IMG_7708.jpeg" alt="Azzaro The Most Wanted">
+      </div>
+      <div class="info">
+        <div class="brand">AZZARO</div>
+        <div class="name">The Most Wanted</div>
+        <div class="description">Сладкий, тёплый и выразительный аромат.</div>
+        <div class="price">от 6 290 ₽</div>
+        <button class="buy" onclick="buy('Azzaro The Most Wanted')">Купить</button>
+      </div>
+    </div>
+
+    <!-- 6 -->
+    <div class="card">
+      <div class="image-box">
+        <img src="images/IMG_7709.jpeg" alt="Tom Ford Oud Wood">
+      </div>
+      <div class="info">
+        <div class="brand">TOM FORD</div>
+        <div class="name">Oud Wood</div>
+        <div class="description">Роскошный древесный аромат с глубоким характером.</div>
+        <div class="price">от 15 990 ₽</div>
+        <button class="buy" onclick="buy('Tom Ford Oud Wood')">Купить</button>
+      </div>
+    </div>
+
+    <!-- 7 -->
+    <div class="card">
+      <div class="image-box">
+        <img src="images/IMG_7710.jpeg" alt="Tom Ford Ombre Leather">
+      </div>
+      <div class="info">
+        <div class="brand">TOM FORD</div>
+        <div class="name">Ombre Leather</div>
+        <div class="description">Насыщенный кожаный аромат с сильным характером.</div>
+        <div class="price">от 14 990 ₽</div>
+        <button class="buy" onclick="buy('Tom Ford Ombre Leather')">Купить</button>
+      </div>
+    </div>
+
+    <!-- 8 -->
+    <div class="card">
+      <div class="image-box">
+        <img src="images/IMG_7711.jpeg" alt="Armani Code">
+      </div>
+      <div class="info">
+        <div class="brand">GIORGIO ARMANI</div>
+        <div class="name">Armani Code</div>
+        <div class="description">Элегантный, тёплый и вечерний аромат.</div>
+        <div class="price">от 5 990 ₽</div>
+        <button class="buy" onclick="buy('Armani Code')">Купить</button>
+      </div>
+    </div>
+
+    <!-- 9 -->
+    <div class="card">
+      <div class="image-box">
+        <img src="images/IMG_7712.jpeg" alt="Terre d’Hermès">
+      </div>
+      <div class="info">
+        <div class="brand">HERMÈS</div>
+        <div class="name">Terre d’Hermès</div>
+        <div class="description">Классический цитрусово-древесный аромат.</div>
+        <div class="price">от 6 490 ₽</div>
+        <button class="buy" onclick="buy('Terre d’Hermès')">Купить</button>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    function buy(perfume) {
+      if (window.Telegram && Telegram.WebApp) {
+        Telegram.WebApp.showAlert(
+          'Вы выбрали: ' + perfume + '\n\nДля покупки свяжитесь с продавцом.'
+        );
+      } else {
+        alert(
+          'Вы выбрали: ' + perfume +
+          '\n\nДля покупки свяжитесь с продавцом.'
+        );
+      }
+    }
+
+    if (window.Telegram && Telegram.WebApp) {
+      Telegram.WebApp.ready();
+      Telegram.WebApp.expand();
+    }
+  </script>
+
+</body>
+</html>
