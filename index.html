@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>PARFUM LAB</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+background:#09090c;
+color:#fff;
+padding:16px;
+}
+
+.header{
+text-align:center;
+padding:18px 0 24px;
+}
+
+.logo{
+font-size:29px;
+font-weight:900;
+letter-spacing:4px;
+}
+
+.subtitle{
+color:#999;
+margin-top:7px;
+font-size:14px;
+}
+
+.box{
+max-width:900px;
+margin:auto;
+}
+
+.question{
+background:#15151b;
+border:1px solid #25252d;
+border-radius:20px;
+padding:18px;
+margin-bottom:14px;
+}
+
+.question h2{
+font-size:18px;
+margin-bottom:13px;
+}
+
+.hint{
+color:#888;
+font-size:12px;
+margin-bottom:12px;
+}
+
+.options{
+display:flex;
+flex-wrap:wrap;
+gap:9px;
+}
+
+.option,.note{
+border:1px solid #303039;
+background:#1b1b22;
+color:#ddd;
+border-radius:12px;
+padding:11px 13px;
+font-size:13px;
+cursor:pointer;
+transition:.2s;
+}
+
+.option.selected,.note.selected{
+background:#fff;
+color:#000;
+border-color:#fff;
+}
+
+.notes{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:9px;
+}
+
+.note{
+text-align:center;
+}
+
+.main-button{
+width:100%;
+border:0;
+background:#fff;
+color:#000;
+border-radius:14px;
+padding:15px;
+font-size:16px;
+font-weight:800;
+margin:5px 0 25px;
+cursor:pointer;
+}
+
+#results{
+display:none;
+}
+
+.results-title{
+font-size:23px;
+font-weight:800;
+margin-bottom:6px;
+}
+
+.results-subtitle{
+color:#888;
+font-size:13px;
+margin-bottom:15px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(2,minmax(0,1fr));
+gap:12px;
+}
+
+.card{
+background:#15151b;
+border:1px solid #25252d;
+border-radius:18px;
+overflow:hidden;
+}
+
+.image-box{
+height:190px;
+background:#f5f5f5;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+.image-box img{
+width:100%;
+height:100%;
+object-fit:contain;
+}
+
+.info{
+padding:12px;
+}
+
+.brand{
+color:#888;
+font-size:11px;
+margin-bottom:4px;
+}
+
+.name{
+font-size:15px;
+font-weight:800;
+line-height:1.2;
+}
+
+.description{
+color:#999;
+font-size:11px;
+line-height:1.35;
+margin:7px 0;
+}
+
+.match{
+color:#aaa;
+font-size:11px;
+margin-bottom:9px;
+}
+
+.price{
+font-size:15px;
+font-weight:800;
+margin-bottom:9px;
+}
+
+.buy{
+width:100%;
+border:0;
+border-radius:11px;
+padding:10px;
+background:#fff;
+color:#000;
+font-weight:800;
+cursor:pointer;
+}
+
+.reset{
+width:100%;
+background:transparent;
+color:#aaa;
+border:1px solid #303039;
+border-radius:13px;
+padding:13px;
+margin-top:15px;
+cursor:pointer;
+}
+
+@media(max-width:430px){
+body{padding:12px}
+.image-box{height:165px}
+.name{font-size:14px}
+.grid{gap:9px}
+}
+
+@media(min-width:700px){
+.notes{grid-template-columns:repeat(4,1fr)}
+.grid{grid-template-columns:repeat(3,1fr)}
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+<div class="logo">PARFUM LAB</div>
+<div class="subtitle">Найди свой идеальный аромат</div>
+</div>
+
+<div class="box">
+
+<div id="quiz">
+
+<div class="question">
+<h2>1. Для кого аромат?</h2>
+
+<div class="options">
+<div class="option gender" data-value="male">👨 Мужской</div>
+<div class="option gender" data-value="female">👩 Женский</div>
+<div class="option gender" data-value="unisex">⚪ Унисекс</div>
+</div>
+</div>
+
+<div class="question">
+<h2>2. Выбери ноты</h2>
+<div class="hint">Можно выбрать несколько вариантов</div>
+
+<div class="notes">
+<div class="note" data-note="citrus">🍋 Цитрусовые</div>
+<div class="note" data-note="marine">🌊 Морские</div>
+<div class="note" data-note="floral">🌹 Цветочные</div>
+<div class="note" data-note="fruity">🍎 Фруктовые</div>
+<div class="note" data-note="woody">🌲 Древесные</div>
+<div class="note" data-note="leather">🖤 Кожаные</div>
+<div class="note" data-note="vanilla">🍦 Ваниль</div>
+<div class="note" data-note="sweet">🍬 Сладкие</div>
+<div class="note" data-note="spicy">🌶️ Пряные</div>
+<div class="note" data-note="oud">🪵 Уд</div>
+<div class="note" data-note="green">🌿 Зелёные</div>
+<div class="note" data-note="coffee">☕ Кофейные</div>
+</div>
+</div>
+
+<div class="question">
+<h2>3. Для какого случая?</h2>
+
+<div class="options">
+<div class="option occasion" data-value="everyday">☀️ Каждый день</div>
+<div class="option occasion" data-value="date">❤️ Свидание</div>
+<div class="option occasion" data-value="work">💼 Работа</div>
+<div class="option occasion" data-value="party">🔥 Вечеринка</div>
+</div>
+</div>
+
+<div class="question">
+<h2>4. Бюджет</h2>
+
+<div class="options">
+<div class="option budget" data-value="3000">До 3 000 ₽</div>
+<div class="option budget" data-value="5000">До 5 000 ₽</div>
+<div class="option budget" data-value="10000">5 000–10 000 ₽</div>
+<div class="option budget" data-value="15000">10 000–15 000 ₽</div>
+<div class="option budget" data-value="999999">15 000+ ₽</div>
+</div>
+</div>
+
+<button class="main-button" onclick="findPerfume()">
+✨ Подобрать аромат
+</button>
+
+</div>
+
+<div id="results">
+
+<div class="results-title">Твои ароматы</div>
+<div class="results-subtitle" id="resultText"></div>
+
+<div class="grid" id="resultGrid"></div>
+
+<button class="reset" onclick="resetQuiz()">
+← Пройти подбор ещё раз
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+const perfumes=[
+
+{
+name:"Sauvage",
+brand:"DIOR",
+image:"images/IMG_7702.jpeg",
+price:5990,
+gender:["male"],
+occasion:["everyday","date","party"],
+notes:["citrus","woody","spicy"],
+description:"Свежий, яркий и мужественный аромат."
+},
+
+{
+name:"Bleu de Chanel",
+brand:"CHANEL",
+image:"images/IMG_7705.jpeg",
+price:7490,
+gender:["male","unisex"],
+occasion:["everyday","work","date"],
+notes:["citrus","woody","spicy"],
+description:"Элегантный древесно-свежий аромат."
+},
+
+{
+name:"Acqua di Giò",
+brand:"GIORGIO ARMANI",
+image:"images/IMG_7706.jpeg",
+price:5490,
+gender:["male"],
+occasion:["everyday","work"],
+notes:["citrus","marine","green"],
+description:"Свежий морской аромат."
+},
+
+{
+name:"Y Eau de Parfum",
+brand:"YVES SAINT LAURENT",
+image:"images/IMG_7707.jpeg",
+price:6490,
+gender:["male"],
+occasion:["everyday","date","party"],
+notes:["fruity","woody","sweet","spicy"],
+description:"Свежий и насыщенный древесный аромат."
+},
+
+{
+name:"The Most Wanted",
+brand:"AZZARO",
+image:"images/IMG_7708.jpeg",
+price:6290,
+gender:["male"],
+occasion:["date","party"],
+notes:["sweet","spicy","vanilla"],
+description:"Сладкий, тёплый и выразительный аромат."
+},
+
+{
+name:"Oud Wood",
+brand:"TOM FORD",
+image:"images/IMG_7709.jpeg",
+price:15990,
+gender:["male","unisex"],
+occasion:["date","work"],
+notes:["oud","woody","spicy"],
+description:"Роскошный древесный аромат."
+},
+
+{
+name:"Ombre Leather",
+brand:"TOM FORD",
+image:"images/IMG_7710.jpeg",
+price:14990,
+gender:["male","unisex"],
+occasion:["date","party","work"],
+notes:["leather","woody","spicy"],
+description:"Насыщенный кожаный аромат."
+},
+
+{
+name:"Armani Code",
+brand:"GIORGIO ARMANI",
+image:"images/IMG_7711.jpeg",
+price:5990,
+gender:["male"],
+occasion:["date","work","party"],
+notes:["sweet","spicy","woody","vanilla"],
+description:"Элегантный тёплый вечерний аромат."
+},
+
+{
+name:"Terre d’Hermès",
+brand:"HERMÈS",
+image:"images/IMG_7712.jpeg",
+price:6490,
+gender:["male","unisex"],
+occasion:["everyday","work"],
+notes:["citrus","woody","green","spicy"],
+description:"Классический цитрусово-древесный аромат."
+},
+
+/* БЮДЖЕТНЫЕ АРОМАТЫ */
+
+{
+name:"Wanted by Night",
+brand:"AZZARO",
+image:"images/IMG_7715.jpeg",
+price:6990,
+gender:["male"],
+occasion:["date","party"],
+notes:["citrus","sweet","spicy","woody"],
+description:"Сладкий пряный аромат для вечера."
+},
+
+{
+name:"Sun Men",
+brand:"JIL SANDER",
+image:"images/IMG_7716.jpeg",
+price:2990,
+gender:["male"],
+occasion:["everyday","date"],
+notes:["citrus","sweet","woody","spicy"],
+description:"Солнечный сладко-древесный аромат."
+},
+
+{
+name:"To Be The King",
+brand:"POLICE",
+image:"images/IMG_7717.jpeg",
+price:1990,
+gender:["male"],
+occasion:["party","date"],
+notes:["fruity","sweet","woody","spicy"],
+description:"Сладкий фруктово-древесный аромат."
+},
+
+{
+name:"Asad",
+brand:"LATTAFA",
+image:"images/IMG_7718.jpeg",
+price:3490,
+gender:["male"],
+occasion:["date","party","work"],
+notes:["vanilla","sweet","spicy","woody","coffee"],
+description:"Сладкий пряный аромат с ванилью и кофе."
+},
+
+{
+name:"9PM",
+brand:"AFNAN",
+image:"images/IMG_7719.jpeg",
+price:3990,
+gender:["male"],
+occasion:["date","party"],
+notes:["vanilla","sweet","fruity","spicy"],
+description:"Сладкий фруктово-ванильный аромат."
+}
+
+];
+
+let selectedGender=null;
+let selectedOccasion=null;
+let selectedBudget=null;
+let selectedNotes=[];
+
+document.querySelectorAll(".gender").forEach(el=>{
+el.onclick=()=>{
+document.querySelectorAll(".gender").forEach(x=>x.classList.remove("selected"));
+el.classList.add("selected");
+selectedGender=el.dataset.value;
+};
+});
+
+document.querySelectorAll(".occasion").forEach(el=>{
+el.onclick=()=>{
+document.querySelectorAll(".occasion").forEach(x=>x.classList.remove("selected"));
+el.classList.add("selected");
+selectedOccasion=el.dataset.value;
+};
+});
+
+document.querySelectorAll(".budget").forEach(el=>{
+el.onclick=()=>{
+document.querySelectorAll(".budget").forEach(x=>x.classList.remove("selected"));
+el.classList.add("selected");
+selectedBudget=Number(el.dataset.value);
+};
+});
+
+document.querySelectorAll(".note").forEach(el=>{
+el.onclick=()=>{
+const note=el.dataset.note;
+
+if(selectedNotes.includes(note)){
+selectedNotes=selectedNotes.filter(x=>x!==note);
+el.classList.remove("selected");
+}else{
+selectedNotes.push(note);
+el.classList.add("selected");
+}
+};
+});
+
+function findPerfume(){
+
+if(!selectedGender){
+alert("Выбери, для кого нужен аромат.");
+return;
+}
+
+if(selectedNotes.length===0){
+alert("Выбери хотя бы одну ноту.");
+return;
+}
+
+if(!selectedOccasion){
+alert("Выбери случай.");
+return;
+}
+
+if(!selectedBudget){
+alert("Выбери бюджет.");
+return;
+}
+
+const scored=perfumes.map(perfume=>{
+
+let score=0;
+
+if(perfume.gender.includes(selectedGender)){
+score+=4;
+}
+
+const matches=perfume.notes.filter(note=>
+selectedNotes.includes(note)
+).length;
+
+score+=matches*7;
+
+if(perfume.occasion.includes(selectedOccasion)){
+score+=3;
+}
+
+if(perfume.price<=selectedBudget){
+score+=5;
+}else{
+score-=8;
+}
+
+return{
+...perfume,
+score,
+matches
+};
+
+});
+
+scored.sort((a,b)=>b.score-a.score);
+
+const results=scored.slice(0,5);
+
+const grid=document.getElementById("resultGrid");
+
+grid.innerHTML="";
+
+results.forEach(perfume=>{
+
+const card=document.createElement("div");
+
+card.className="card";
+
+card.innerHTML=`
+
+<div class="image-box">
+<img src="${perfume.image}" alt="${perfume.name}">
+</div>
+
+<div class="info">
+
+<div class="brand">${perfume.brand}</div>
+
+<div class="name">${perfume.name}</div>
+
+<div class="description">
+${perfume.description}
+</div>
+
+<div class="match">
+Совпадение нот: ${perfume.matches}
+</div>
+
+<div class="price">
+от ${perfume.price.toLocaleString("ru-RU")} ₽
+</div>
+
+<button class="buy" onclick="buy('${perfume.name}')">
+Купить
+</button>
+
+</div>
+`;
+
+grid.appendChild(card);
+
+});
+
+document.getElementById("resultText").textContent=
+"Подобрали лучшие варианты по твоим предпочтениям.";
+
+document.getElementById("quiz").style.display="none";
+
+document.getElementById("results").style.display="block";
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+}
+
+function resetQuiz(){
+
+selectedGender=null;
+selectedOccasion=null;
+selectedBudget=null;
+selectedNotes=[];
+
+document.querySelectorAll(".selected")
+.forEach(x=>x.classList.remove("selected"));
+
+document.getElementById("results").style.display="none";
+
+document.getElementById("quiz").style.display="block";
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+}
+
+function buy(perfume){
+
+const message=
+"Вы выбрали: "+perfume+
+"\n\nДля покупки свяжитесь с продавцом.";
+
+if(window.Telegram&&Telegram.WebApp){
+Telegram.WebApp.showAlert(message);
+}else{
+alert(message);
+}
+
+}
+
+if(window.Telegram&&Telegram.WebApp){
+Telegram.WebApp.ready();
+Telegram.WebApp.expand();
+}
+
+</script>
+
+</body>
+</html>
